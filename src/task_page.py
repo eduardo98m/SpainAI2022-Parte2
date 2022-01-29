@@ -2,7 +2,7 @@ import streamlit as st
 import billboard
 def task():
     text  = """
-            La tarea consiste en hacer cosas con la lista billboard 
+            La tarea consiste en hacerle  preguntas a nuestro modelo sobre esta lista lista de canciones.
             
             """
     st.markdown(text)

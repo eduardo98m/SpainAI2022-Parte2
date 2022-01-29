@@ -6,6 +6,7 @@ import streamlit.components.v1 as components
 from home_page import home
 from task_page import task
 from page_sidebar import sidebar
+from model_page import model
 
 
 def main():
@@ -33,7 +34,7 @@ def main():
 
         "Inicio ⚙️⚡":home,
         "La Tarea 📔":task,
-        #"El Señor Modelo 🗘":model_download,
+        "El Señor Modelo 🗘":model,
 
     }
 
