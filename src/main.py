@@ -2,56 +2,66 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+# Importamos las paginas
+from home_page import home
+from task_page import task
+from page_sidebar import sidebar
 
-# Configuraciones de nuestra pagina web
 
+def main():
+    # Configuraciones de nuestra pagina web
+    st.set_page_config(
+        page_title="Mira mamá mi propio modelo de ML",
+        page_icon="⚙️",
+        layout="wide",
+        initial_sidebar_state="expanded",
+        menu_items={
+            'Report a bug': "https://github.com/eduardo98m/SpainAI2022-Parte2",
+        }
+    )
 
-st.set_page_config(
-    page_title="Mira mamá mi propio modelo de ML",
-    page_icon="⚙️",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Report a bug': "https://github.com/eduardo98m/SpainAI2022-Parte2",
+    # Removal of the default Streamlit Main Menu and footer
+    hide_menu_style = """
+            <style>
+            #MainMenu {visibility: hidden; }
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+    pages_mapper = {
+
+        "Inicio ⚙️⚡":home,
+        "La Tarea 📔":task,
+        #"El Señor Modelo 🗘":model_download,
+
     }
-)
 
-# Removal of the default Streamlit Main Menu and footer
-hide_menu_style = """
-        <style>
-        #MainMenu {visibility: hidden; }
-        footer {visibility: hidden;}
-        </style>
-        """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
+    #Distintas paginas!!!#
+
+    pages_list = list(pages_mapper.keys())
 
 
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = pages_list[0]
 
-#Distintas paginas!!!#
+    current_page, st.session_state.current_page = sidebar(pages_list)
 
-pages = ["Inicio ⚙️⚡",
-         "La Tarea 📔",
-         "El Señor Modelo 🗘",
-         ]
+    #
+    components.html(
+        f"""
+            <p>{st.session_state.current_page }</p>
+            <script>
+                window.parent.document.querySelector('section.main').scrollTo(0, 0);
+            </script>
+        """,
+        height=0
+    )
 
+    st.title(st.session_state.current_page)
+    
+    pages_mapper[current_page]()
+    
 
-if 'current_page' not in st.session_state:
-    st.session_state.current_page = pages[0]
-
-st.session_state.current_page = st.sidebar.radio(
-    "",
-    pages)
-
-#
-components.html(
-    f"""
-        <p>{st.session_state.current_page }</p>
-        <script>
-            window.parent.document.querySelector('section.main').scrollTo(0, 0);
-        </script>
-    """,
-    height=0
-)
-# Funciones
-
-st.title("Hola mama mira mi propio modelo de ML")
+if __name__ == "__main__":
+    main()

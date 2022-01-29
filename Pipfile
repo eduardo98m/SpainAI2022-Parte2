@@ -8,6 +8,11 @@ streamlit = "*"
 numpy = "*"
 pandas = "*"
 matplotlib = "*"
+transformers = "*"
+bokeh = "*"
+sentence-transformers = "*"
+"billboard.py" = "*"
+sklearn = "*"
 
 [dev-packages]
 
