@@ -10,7 +10,7 @@ st.set_page_config(
     page_title="Mira mamá mi propio modelo de ML",
     page_icon="⚙️",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
     menu_items={
         'Report a bug': "https://github.com/eduardo98m/SpainAI2022-Parte2",
     }
@@ -25,6 +25,23 @@ hide_menu_style = """
         """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
+
+
+#Distintas paginas!!!#
+
+pages = ["Inicio ⚙️⚡",
+         "La Tarea 📔",
+         "El Señor Modelo 🗘",
+         ]
+
+
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = pages[0]
+
+st.session_state.current_page = st.sidebar.radio(
+    "",
+    pages)
+
 #
 components.html(
     f"""
@@ -35,20 +52,6 @@ components.html(
     """,
     height=0
 )
-
-#Distintas paginas!!!#
-
-pages = ["Inicio ⚙️⚡",
-         "La Tarea 📔",
-         "El Señor Modelo 🗘",
-         ]
-
-st.session_state.current_page = st.sidebar.radio(
-    "",
-    pages)
-
-if 'current_page' not in st.session_state:
-    st.session_state.current_page = pages[0],
 # Funciones
 
 st.title("Hola mama mira mi propio modelo de ML")
